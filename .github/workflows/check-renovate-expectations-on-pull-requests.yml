@@ -2,7 +2,8 @@ name: check-renovate-expectations-on-pull-requests
 on:
   pull_request:
     paths:
-      - check-renovate-expectations-on-pull-requests.yml
+      - .github/workflows/check-renovate-expectations-on-pull-requests.yml
+      - .nvmrc
       - renovate/expectations.json
       - renovate/renovate.json
       - scripts/check-renovate-expectations.mjs
