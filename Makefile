@@ -1,9 +1,9 @@
 
 renovate-report:
-	RENOVATE_CONFIG_FILE=renovate/renovate.json \
 	NVM_DIR="$${HOME}/.nvm" && \
 		. "$${NVM_DIR}/nvm.sh" && \
 		nvm use && \
+		RENOVATE_CONFIG_FILE=renovate/renovate.json \
 		npx --yes --package renovate@44.143.0 -- renovate \
 			--platform=local \
 			--dry-run=extract \
