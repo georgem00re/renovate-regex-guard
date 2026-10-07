@@ -9,7 +9,7 @@ generate-renovate-report:
 			--dry-run=extract \
 			--onboarding=false \
 			--report-type=file \
-			--report-path=renovate-report.json \
+			--report-path=renovate/renovate-report.json \
 			--require-config=optional
 
 check-renovate-expectations: generate-renovate-report
@@ -17,5 +17,5 @@ check-renovate-expectations: generate-renovate-report
 		. "$${NVM_DIR}/nvm.sh" && \
 		nvm use && \
 		node scripts/check-renovate-expectations.mjs \
-			renovate-report.json \
+			renovate/renovate-report.json \
 			renovate/expectations.json
