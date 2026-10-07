@@ -1,5 +1,5 @@
 
-renovate-report:
+generate-renovate-report:
 	NVM_DIR="$${HOME}/.nvm" && \
 		. "$${NVM_DIR}/nvm.sh" && \
 		nvm use && \
@@ -12,7 +12,7 @@ renovate-report:
 			--report-path=renovate-report.json \
 			--require-config=optional
 
-check-renovate-expectations: renovate-report
+check-renovate-expectations: generate-renovate-report
 	NVM_DIR="$${HOME}/.nvm" && \
 		. "$${NVM_DIR}/nvm.sh" && \
 		nvm use && \
