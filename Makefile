@@ -11,3 +11,11 @@ renovate-report:
 			--report-type=file \
 			--report-path=renovate-report.json \
 			--require-config=optional
+
+check-renovate-expectations: renovate-report
+	NVM_DIR="$${HOME}/.nvm" && \
+		. "$${NVM_DIR}/nvm.sh" && \
+		nvm use && \
+		node scripts/check-renovate-expectations.mjs \
+			renovate-report.json \
+			renovate/expectations.json
