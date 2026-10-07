@@ -1,0 +1,25 @@
+name: run-renovate-on-dispatch
+on:
+  workflow_dispatch:
+    #  schedule: # We could run this workflow on a schedule (e.g. Every weekday at 06:00 UTC).
+    #    - cron: "0 6 * * 1-5"
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
+        description: "Enable Renovate debug logging"
+jobs:
+  run-renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: ./.github/actions/get-repository-name-and-owner
+        id: get-repository-name-and-owner
+      - uses: renovatebot/github-action@v46.0.2
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_AUTODISCOVER: "true"
+          RENOVATE_AUTODISCOVER_FILTER: "${{ steps.get-repository-name-and-owner.outputs.repository-owner }}/${{ steps.get-repository-name-and-owner.outputs.repository-name }}"
+          LOG_LEVEL: ${{ inputs.debug && 'debug' || 'info' }}
