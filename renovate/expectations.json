@@ -1,0 +1,36 @@
+{
+  "expectations": [
+    {
+      "manager": "regex",
+      "packageFile": "versions.env",
+      "depName": "renovatebot/renovate",
+      "datasource": "github-releases",
+      "currentValuePattern": "^\\d+\\.\\d+\\.\\d+$",
+      "count": 1
+    },
+    {
+      "manager": "regex",
+      "packageFile": "versions.env",
+      "depName": "node",
+      "datasource": "node-version",
+      "currentValuePattern": "^\\d+\\.\\d+\\.\\d+$",
+      "count": 1
+    },
+    {
+      "manager": "regex",
+      "packageFile": "versions-tools.env",
+      "depName": "docker/cli",
+      "datasource": "github-releases",
+      "currentValuePattern": "^\\d+\\.\\d+\\.\\d+$",
+      "count": 1
+    },
+    {
+      "manager": "regex",
+      "packageFile": "versions-tools.env",
+      "depName": "pnpm",
+      "datasource": "npm",
+      "currentValuePattern": "^\\d+\\.\\d+\\.\\d+$",
+      "count": 1
+    }
+  ]
+}
