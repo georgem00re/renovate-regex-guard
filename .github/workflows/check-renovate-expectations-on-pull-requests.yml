@@ -1,0 +1,41 @@
+name: check-renovate-expectations-on-pull-requests
+on:
+  pull_request:
+    paths:
+      - check-renovate-expectations-on-pull-requests.yml
+      - renovate/expectations.json
+      - renovate/renovate.json
+      - scripts/check-renovate-expectations.mjs
+      - versions.env
+      - versions-tools.env
+permissions:
+  contents: read
+jobs:
+  check-renovate-expectations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: Generate Renovate report
+        env:
+          RENOVATE_CONFIG_FILE: renovate/renovate.json
+        run: |
+          npx --yes --package renovate@44.143.0 -- renovate \
+            --platform=local \
+            --dry-run=extract \
+            --onboarding=false \
+            --report-type=file \
+            --report-path=renovate/renovate-report.json \
+            --require-config=optional
+
+      - name: Check Renovate expectations
+        run: |
+          node scripts/check-renovate-expectations.mjs \
+            renovate/renovate-report.json \
+            renovate/expectations.json
